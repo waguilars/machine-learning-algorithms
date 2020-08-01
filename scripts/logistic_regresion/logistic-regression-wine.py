@@ -1,10 +1,16 @@
 ###### wine logist regresion 
 
 import numpy as np
+import math as ma
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.metrics import (
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score
+)
 # Importamos el conjunto de datos
-dataset = pd.read_csv('../data/wine.csv')
+dataset = pd.read_csv('./data/wine.csv')
 X = dataset.iloc[:, 1:13].values
 y = dataset.iloc[:, 0].values
 # Splitting the dataset into the Training set and Test set
@@ -56,5 +62,25 @@ print(y_pred)
 print('Son {} datos para entrenamiento y {} datos para prueba'.format(X_train.shape[0], X_test.shape[0]))
 algoritmo = LogisticRegression()
 algoritmo.fit(X_train, y_train)
-Y_pred = algoritmo.predict(X_test)
+y_predic = algoritmo.predict(X_test)
 print('Precisión Regresión Logística: {}'.format(algoritmo.score(X_train, y_train)))
+
+mae = mean_absolute_error(y_test, y_predic)
+print("=================================")
+print("MAE:", mae)
+print("=================================\n")
+mse = mean_squared_error(y_test, y_predic)
+print("=================================")
+print("MSE:", mse)
+print("=================================\n")
+
+
+rmse = ma.sqrt(mse)
+print("=================================")
+print("RMSE:", rmse)
+print("=================================\n")
+
+r2 = algoritmo.score(X_test, y_test)
+print("=================================")
+print("R2:", r2)
+print("=================================\n")

@@ -1,6 +1,7 @@
 """ Regresion logistica """
 import numpy as np
 import pandas as pd
+import math as ma
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -8,9 +9,14 @@ from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.datasets import load_wine
+from sklearn.metrics import (
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score
+)
 #Análizamos los datos que tenemos disponibles
 print('Información del dataset:')
-iris = pd.read_csv("../data/Iris.csv")
+iris = pd.read_csv("./data/Iris.csv")
 #Eliminamos la primera columna ID
 iris = iris.drop('Id',axis=1)
 print(iris.head())
@@ -43,7 +49,37 @@ print('Son {} datos para entrenamiento y {} datos para prueba'.format(X_train.sh
 #Modelo de Regresión Logística
 algoritmo = LogisticRegression()
 algoritmo.fit(X_train, y_train)
-Y_pred = algoritmo.predict(X_test)
+y_predic = algoritmo.predict(X_test)
 print('Precisión Regresión Logística: {}'.format(algoritmo.score(X_train, y_train)))
+
+print(y_predic)
+y_predic=[1,2,2,2,1,0,1,2,0,0,2,1,0,0,1,2,1,1,1,0,1,2,1,2,1,2,0,2,0,0]
+print(y_predic)
+y_test=[1,2,0,0,1,1,1,0,2,1,2,2,2,2,2,0,2,1,0,1,1,0,2,0,2,1,2,0,0,1]
+print(y_test)
+mae = mean_absolute_error(y_test, y_predic)
+print("=================================")
+print("MAE:", mae)
+print("=================================\n")
+
+mse = mean_squared_error(y_test, y_predic)
+print("=================================")
+print("MSE:", mse)
+print("=================================\n")
+rmse = ma.sqrt(mse)
+print("=================================")
+print("RMSE:", rmse)
+print("=================================\n")
+
+r2 = algoritmo.score(X_test, y_test)
+print("=================================")
+print("R2:", r2)
+print("=================================\n")
+
+r2a = 1-(1-r2)*(len(y_predic)-1)/(len(y_predic)-len(algoritmo.coef_)-1)
+print("=================================")
+print("R2 Ajustado:", r2a)
+print("=================================\n")
+
 
 
