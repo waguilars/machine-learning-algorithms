@@ -4,45 +4,49 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score, recall_score, precision_score
 
+def knn_iris(iris):
+    x, y = iris(return_X_y=True)
 
-x, y = load_iris(return_X_y=True)
+    X_train, X_test, y_train, y_test = train_test_split(
+        x, y, test_size=0.3, random_state=0)
 
-X_train, X_test, y_train, y_test = train_test_split(
-    x, y, test_size=0.3, random_state=0)
+    knn = KNeighborsClassifier(n_neighbors=3).fit(X_train, y_train)
+    predicted = knn.predict(X_test)
+    acc = knn.score(X_test, y_test)
 
-knn = KNeighborsClassifier(n_neighbors=3).fit(X_train, y_train)
-predicted = knn.predict(X_test)
-acc = knn.score(X_test, y_test)
+    #print('Accuracy:', acc)
 
-print('Accuracy:', acc)
+    presicion = precision_score(y_test, predicted, average=None)
+    #print('Presicion:', presicion)
 
-presicion = precision_score(y_test, predicted, average=None)
-print('Presicion:', presicion)
+    recall = recall_score(y_test, predicted, average=None)
+    #print('Recall:', recall)
 
-recall = recall_score(y_test, predicted, average=None)
-print('Recall:', recall)
+    f1 = f1_score(y_test, predicted, average=None)
+    #print('F1 measure:', f1)
+    responsive = [acc,presicion,recall,f1]
+    return responsive
 
-f1 = f1_score(y_test, predicted, average=None)
-print('F1 measure:', f1)
+    #print('-----------------------  WINE --------------------\n')
+def knn_wine(wine):
+    x, y = wine(return_X_y=True)
 
+    X_train, X_test, y_train, y_test = train_test_split(
+        x, y, test_size=0.3, random_state=0)
 
-print('-----------------------  WINE --------------------\n')
-x, y = load_wine(return_X_y=True)
+    knn = KNeighborsClassifier(n_neighbors=3).fit(X_train, y_train)
+    predicted = knn.predict(X_test)
+    acc = knn.score(X_test, y_test)
 
-X_train, X_test, y_train, y_test = train_test_split(
-    x, y, test_size=0.3, random_state=0)
+    #print('Accuracy:', acc)
 
-knn = KNeighborsClassifier(n_neighbors=3).fit(X_train, y_train)
-predicted = knn.predict(X_test)
-acc = knn.score(X_test, y_test)
+    presicion = precision_score(y_test, predicted, average=None)
+    #print('Presicion:', presicion)
 
-print('Accuracy:', acc)
+    recall = recall_score(y_test, predicted, average=None)
+    #print('Recall:', recall)
 
-presicion = precision_score(y_test, predicted, average=None)
-print('Presicion:', presicion)
-
-recall = recall_score(y_test, predicted, average=None)
-print('Recall:', recall)
-
-f1 = f1_score(y_test, predicted, average=None)
-print('F1 measure:', f1)
+    f1 = f1_score(y_test, predicted, average=None)
+    #print('F1 measure:', f1)
+    responsive = [acc,presicion,recall,f1]
+    return responsive
