@@ -134,5 +134,44 @@
 
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Support Vector Machine</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Accuracy</h4>
+                        <p class="card-text">{{ svm[2] }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <table class="table table-hover">
+
+                    <tbody>
+                        <tr class="table-active">
+                            <th scope="row">Precision</th>
+                            {% for i in svm[0]%}
+                            <td>{{ i }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row">Recall</th>
+                            {% for i in svm[1]%}
+                            <td>{{ i }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr class="table-active">
+                            <th scope="row">F-Measure</th>
+                            {% for i in svm[3]%}
+                            <td>{{ i }}</td>
+                            {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
 </div>
 {% endblock %}
