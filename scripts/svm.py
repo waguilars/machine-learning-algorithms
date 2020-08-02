@@ -37,38 +37,41 @@ def get_accuracy(conf_mtx):
     return tp_tn / total
 
 
+def svm_iris(iris):
+    X, y = iris(return_X_y=True)
 
-X, y = load_iris(return_X_y=True)
+    X_train,X_test,y_train,y_test= train_test_split(X,y,test_size=0.3,random_state=0)
 
-X_train,X_test,y_train,y_test= train_test_split(X,y,test_size=0.3,random_state=0)
+    clf = svm.SVC(kernel='poly')
+    clf.fit(X_train, y_train)
 
-clf = svm.SVC(kernel='poly')
-clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
 
-y_pred = clf.predict(X_test)
-
-matrix_confusion = confusion_matrix(y_test,y_pred)
+    matrix_confusion = confusion_matrix(y_test,y_pred)
 
 # ==========================
 #           PRESICION
 # ==========================
-presicion = get_precision(matrix_confusion)
-print("presicion: \n\t", presicion)
+    presicion = get_precision(matrix_confusion)
+# print("presicion: \n\t", presicion)
 
 # ==========================
 #           RECALL
 # ==========================
-recall = get_recall(matrix_confusion)
-print("recall: \n\t", recall)
+    recall = get_recall(matrix_confusion)
+# print("recall: \n\t", recall)
 
 # ==========================
 #         ACCURACY
 # ==========================
-accuracy = get_accuracy(matrix_confusion)
-print("accuracy: \n\t", accuracy)
+    accuracy = get_accuracy(matrix_confusion)
+# print("accuracy: \n\t", accuracy)
 
 # ==========================
 #         F-MEASURE
 # ==========================
-f1 = get_fmeasure(matrix_confusion)
-print("f-measure: \n\t", f1)
+    f1 = get_fmeasure(matrix_confusion)
+    # print("f-measure: \n\t", f1)
+    results=[presicion,recall,accuracy,f1]
+    return results
+

@@ -9,7 +9,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 #Análizamos los datos que tenemos disponibles
 print('Información del dataset:')
-iris = pd.read_csv("data/Iris.csv")
+iris = pd.read_csv("../data/Iris.csv")
 #Eliminamos la primera columna ID
 iris = iris.drop('Id',axis=1)
 print(iris.head())
