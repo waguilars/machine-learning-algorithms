@@ -3,8 +3,9 @@ from sklearn.datasets import load_iris, load_wine
 from scripts import knn,random_forest,NB_and_RF,neural_network,naive_bayes,svm
 from scripts.logistic_regresion import logistic_regression,logistic_regression_wine
 import pandas as pd
+
 wine=pd.read_csv('./scripts/data/Wine.csv',header=None)
-iris = pd.read_csv("./scripts/data/iris.csv")
+iris = pd.read_csv("./scripts/data/Iris.csv")
 wine1=pd.read_csv('./scripts/data/Wine.csv')
 
 knn_iris = knn.knn_iris(load_iris)
@@ -39,5 +40,9 @@ def index():
     return render_template('index.html',active=['active','',''])
 
 
+# app.run(host='localhost',port=4000,debug=True)
+
+# if __name__ == "__main__":
+#     app.run(debug=True, port=4000)
 
 
